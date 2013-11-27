@@ -144,6 +144,7 @@ class Products extends Admin_Controller {
 		$data['file_list']		= $this->Digital_Product_model->get_list();
 
 		$data['page_title']		= lang('product_form');
+		$data['categories']	= $this->Category_model->get_categories();
 
 		//default values are empty if the product is new
 		$data['id']					= '';

@@ -220,7 +220,6 @@ function remove_option(id)
 								<input class="span2" type="text" id="category_search" />
 								<script type="text/javascript">
 								$('#category_search').keyup(function(){
-									$('#category_list').html('');
 									run_category_query();
 								});
 
@@ -246,7 +245,11 @@ function remove_option(id)
 						</div>
 						<div class="row">
 							<div class="span2">
-								<select class="span2" id="category_list" size="5" style="margin:0px;"></select>
+								<select class="span2" id="category_list" size="5" style="margin:0px;">
+<?php foreach ($categories as $category):?>
+								<option id="category_item_<?php echo $category->id;?>" value="<?php echo $category->id;?>"><?php echo $category->name;?></option>
+<?php endforeach;?>
+								</select>
 							</div>
 						</div>
 						<div class="row">
@@ -730,7 +733,6 @@ function add_category()
 		<?php $new_item	 = str_replace(array("\n", "\t", "\r"),'',category("'+$('#category_list').val()+'", "'+$('#category_item_'+$('#category_list').val()).html()+'"));?>
 		var category = '<?php echo $new_item;?>';
 		$('#categories_container').append(category);
-		run_category_query();
 	}
 }
 
