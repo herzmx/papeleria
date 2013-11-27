@@ -19,6 +19,7 @@ class Install extends CI_Controller {
 	 */
 	public function index()
 	{
+		$this->output->enable_profiler(TRUE);
 		/*
 		are we installing into a subfolder?
 		if not, then the subfolder variabel below will be empty. If we are it will contain a value.
