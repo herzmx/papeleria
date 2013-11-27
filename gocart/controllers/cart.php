@@ -14,6 +14,73 @@ class Cart extends Front_Controller {
 	{
 		$this->load->model(array('Banner_model', 'box_model'));
 		$this->load->helper('directory');
+		$id = 6;
+		$data['category'] 			= $this->Category_model->get_category($id);
+		//get the category
+		$data['category']			= $this->Category_model->get_category($id);
+				
+		if (!$data['category'])
+		{
+			show_404();
+		}
+		
+		//set up pagination
+		$segments	= $this->uri->total_segments();
+		$base_url	= $this->uri->segment_array();
+		
+		$page	= 0;
+		$segments++;
+		
+		$data['base_url']	= $base_url;
+		$base_url			= implode('/', $base_url);
+		
+		$data['subcategories']		= $this->Category_model->get_categories($data['category']->id);
+		$data['product_columns']	= $this->config->item('product_columns');
+		$data['gift_cards_enabled'] = $this->gift_cards_enabled;
+		
+		$data['meta']		= $data['category']->meta;
+		
+		$sort_by	= array('by'=>'sequence', 'sort'=>'ASC');
+		
+		//set up pagination
+		$this->load->library('pagination');
+		$config['base_url']		= site_url($base_url);
+		$config['uri_segment']	= $segments;
+		$config['per_page']		= 24;
+		$config['total_rows']	= $this->Product_model->count_products($data['category']->id);
+		
+		$config['first_link'] = 'First';
+		$config['first_tag_open'] = '<li>';
+		$config['first_tag_close'] = '</li>';
+		$config['last_link'] = 'Last';
+		$config['last_tag_open'] = '<li>';
+		$config['last_tag_close'] = '</li>';
+
+		$config['full_tag_open'] = '<div class="pagination"><ul>';
+		$config['full_tag_close'] = '</ul></div>';
+		$config['cur_tag_open'] = '<li class="active"><a href="#">';
+		$config['cur_tag_close'] = '</a></li>';
+		
+		$config['num_tag_open'] = '<li>';
+		$config['num_tag_close'] = '</li>';
+		
+		$config['prev_link'] = '&laquo;';
+		$config['prev_tag_open'] = '<li>';
+		$config['prev_tag_close'] = '</li>';
+
+		$config['next_link'] = '&raquo;';
+		$config['next_tag_open'] = '<li>';
+		$config['next_tag_close'] = '</li>';
+		
+		$this->pagination->initialize($config);
+		
+		//grab the products using the pagination lib
+		$data['products']	= $this->Product_model->get_products($data['category']->id, $config['per_page'], $page, $sort_by['by'], $sort_by['sort']);
+		foreach ($data['products'] as &$p)
+		{
+			$p->images	= (array)json_decode($p->images);
+			$p->options	= $this->Option_model->get_product_options($p->id);
+		}
 
 		$data['gift_cards_enabled'] = $this->gift_cards_enabled;
 		$data['banners']			= $this->Banner_model->get_homepage_banners(5);
