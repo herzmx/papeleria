@@ -17,13 +17,13 @@ $lang['image']= 'Imagen';
 
 $lang['current_file']= 'Archivo Actual';
 
-$lang['confirm_delete_banner']	= '¿Esta seguro que desea eliminar esta bandera?';
+$lang['confirm_delete_banner']	= 'Â¿Esta seguro que desea eliminar esta bandera?';
 
 $lang['add_new_banner']	= 'Agregar nueva bandera';
 
 $lang['no_banners']= 'Actualmente no hay banderas';
 
-$lang['message_banner_saved']	= '¡La bandera ha sido guardada!';
+$lang['message_banner_saved']	= 'Â¡La bandera ha sido guardada!';
 
 $lang['date_error']= 'La fecha "Desactivada" no puede estar antes de la fecha "Activada" .';
 
@@ -33,4 +33,4 @@ $lang['message_delete_banner']	= 'La bandera ha sido eliminada.';
 
 $lang['sort']= 'Ordenar';
 
-$lang['sort_banners']= 'Las banderas se pueden ordenar!  Sólo tienes que arrastrar y soltar en el orden que desea para que aparezcan.';
+$lang['sort_banners']= 'Las banderas se pueden ordenar!  SÃ³lo tienes que arrastrar y soltar en el orden que desea para que aparezcan.';
