@@ -2,6 +2,7 @@
 
 <div class="row">
 	<div class="span12">
+<?php if(!empty($banners)):?>
 		<div id="myCarousel" class="carousel slide">
 			<!-- Carousel items -->
 			<div class="carousel-inner">
@@ -36,6 +37,7 @@
 			<a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
 			<a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
 		</div>
+<?php endif;?>
 	</div>
 </div>
 
